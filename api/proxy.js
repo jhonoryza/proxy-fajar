@@ -11,6 +11,8 @@ export default async function handler(req, res) {
   }
 
   try {
+    console.log("Request URL:", req.url);
+
     const targetURL = `${targetDomain}${req.url}`;
 
     // Forward request ke server tujuan
