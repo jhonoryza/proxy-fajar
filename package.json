@@ -1,0 +1,17 @@
+{
+  "name": "vercel-reverse-proxy",
+  "version": "1.0.0",
+  "description": "Reverse proxy using Vercel Serverless Function",
+  "main": "api/proxy.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel deploy --prod"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
+
