@@ -25,6 +25,8 @@ export default async function handler(req, res) {
       body: req.method !== "GET" && req.method !== "HEAD" ? req.body : undefined,
     });
 
+    console.log("Response from target:", response.status);
+
     response.headers.forEach((value, key) => {
       res.setHeader(key, value);
     });
