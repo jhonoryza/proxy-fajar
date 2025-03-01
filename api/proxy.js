@@ -23,12 +23,19 @@ export default async function handler(req, res) {
       body: req.method !== "GET" && req.method !== "HEAD" ? req.body : undefined,
     });
 
+    response.headers.forEach((value, key) => {
+      res.setHeader(key, value);
+    });
+
     // Stream response untuk performa lebih baik
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-    response.body?.pipe(res);
+    // Baca response sebagai buffer dan kirim ke client
+    const data = await response.arrayBuffer();
+    res.status(response.status).send(Buffer.from(data));
+
   } catch (error) {
     console.error("Proxy Error:", error);
     res.status(500).json({ error: "Internal Server Error" });
